@@ -17,6 +17,26 @@ Describe "WorkDays" {
             (Get-Date 23/10/2021) | Assert-IsWeekend | Should -Be $true
         }
     }
+    Context "Leap Year" {
+        It "1900 isn't a Leap Year" {
+            Assert-IsLeapYear -Year 1900 | Should -Be $false
+        }
+        It "2020 is a Leap Year" {
+            Assert-IsLeapYear -Year 2020 | Should -Be $true
+        }
+        It "2021 isn't a Leap Year" {
+            Assert-IsLeapYear -Year 2021 | Should -Be $false
+        }
+        It "2022 isn't a Leap Year" {
+            Assert-IsLeapYear -Year 2022 | Should -Be $false
+        }
+        It "2023 isn't a Leap Year" {
+            Assert-IsLeapYear -Year 2023 | Should -Be $false
+        }
+        It "2024 is a Leap Year" {
+            Assert-IsLeapYear -Year 2024 | Should -Be $true
+        }
+    }
     Context "UK Public Holidays" {
         Context "2016" {
             It "New Year's Day 2016" {
@@ -219,6 +239,11 @@ Describe "WorkDays" {
             }
             It "Boxing Day" {
                 Get-BoxingDay -Year 2022 | Should -Be (Get-Date 27/12/2022)
+            }
+        }
+        Context "Bank Holiday collection" {
+            It "Bank Holiday collection count should be 8" {
+                (Get-BankHolidays).Count | Should -Be 8
             }
         }
     }

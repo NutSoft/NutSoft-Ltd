@@ -28,6 +28,21 @@ function Assert-IsWeekday {
     }
 }
 
+function Assert-IsLeapYear {
+    [CmdletBinding()]
+    param (
+        [Parameter(
+            ValueFromPipeline = $true
+        )]
+        [int]
+        $Year = (Get-Date).Year
+    )
+
+    process {
+        ((Get-Date -Year $Year -Month 2 -Day 29).Month -eq 2)
+    }
+}
+
 function Get-NewYearsDay {
     [CmdletBinding()]
     param (
@@ -218,5 +233,29 @@ function Get-BoxingDay {
             $day = $day.AddDays(1)
         }
         $day
+    }
+}
+
+function Get-BankHolidays {
+    [CmdletBinding()]
+    param (
+        [Parameter(
+            ValueFromPipeline = $true
+        )]
+        [int]
+        $Year = (Get-Date).Year
+    )
+
+    process {
+        @(
+            (Get-NewYearsDay -Year $Year),
+            (Get-GoodFriday -Year $Year),
+            (Get-EasterMonday -Year $Year),
+            (Get-EarlyMayBankHoliday -Year $Year),
+            (Get-SpringBankHoliday -Year $Year),
+            (Get-SummerBankHoliday -Year $Year),
+            (Get-ChristmasDay -Year $Year),
+            (Get-BoxingDay -Year $Year)
+        )
     }
 }
