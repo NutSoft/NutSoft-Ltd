@@ -31,7 +31,7 @@ Describe "WorkDays" {
             It "Easter Monday" {
                 Get-EasterMonday -Year 2020 | Should -Be (Get-Date 13/4/2020)
             }
-            It "Early May Bank Holiday" {
+            It "Early May Bank Holiday (VE Day)" {
                 Get-EarlyMayBankHoliday -Year 2020 | Should -Be (Get-Date 8/5/2020)
             }
             It "Spring Bank Holiday" {
