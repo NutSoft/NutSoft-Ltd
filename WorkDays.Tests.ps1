@@ -18,6 +18,122 @@ Describe "WorkDays" {
         }
     }
     Context "UK Public Holidays" {
+        Context "2016" {
+            It "New Year's Day 2016" {
+                Get-NewYearsDay -Year 2016 | Should -Be (Get-Date 1/1/2016)
+            }
+            It "Good Friday" {
+                Get-GoodFriday -Year 2016 | Should -Be (Get-Date 25/3/2016)
+            }
+            It "Easter Sunday" {
+                Get-EasterSunday -Year 2016 | Should -Be (Get-Date 27/3/2016)
+            }
+            It "Easter Monday" {
+                Get-EasterMonday -Year 2016 | Should -Be (Get-Date 28/3/2016)
+            }
+            It "Early May Bank Holiday" {
+                Get-EarlyMayBankHoliday -Year 2016 | Should -Be (Get-Date 2/5/2016)
+            }
+            It "Spring Bank Holiday" {
+                Get-SpringBankHoliday -Year 2016 | Should -Be (Get-Date 30/5/2016)
+            }
+            It "Summer Bank Holiday" {
+                Get-SummerBankHoliday -Year 2016 | Should -Be (Get-Date 29/8/2016)
+            }
+            It "Christmas Day" {
+                Get-ChristmasDay -Year 2016 | Should -Be (Get-Date 26/12/2016)
+            }
+            It "Boxing Day" {
+                Get-BoxingDay -Year 2016 | Should -Be (Get-Date 27/12/2016)
+            }
+        }
+        Context "2017" {
+            It "New Year's Day 2017" {
+                Get-NewYearsDay -Year 2017 | Should -Be (Get-Date 2/1/2017)
+            }
+            It "Good Friday" {
+                Get-GoodFriday -Year 2017 | Should -Be (Get-Date 14/4/2017)
+            }
+            It "Easter Sunday" {
+                Get-EasterSunday -Year 2017 | Should -Be (Get-Date 16/4/2017)
+            }
+            It "Easter Monday" {
+                Get-EasterMonday -Year 2017 | Should -Be (Get-Date 17/4/2017)
+            }
+            It "Early May Bank Holiday" {
+                Get-EarlyMayBankHoliday -Year 2017 | Should -Be (Get-Date 1/5/2017)
+            }
+            It "Spring Bank Holiday" {
+                Get-SpringBankHoliday -Year 2017 | Should -Be (Get-Date 29/5/2017)
+            }
+            It "Summer Bank Holiday" {
+                Get-SummerBankHoliday -Year 2017 | Should -Be (Get-Date 28/8/2017)
+            }
+            It "Christmas Day" {
+                Get-ChristmasDay -Year 2017 | Should -Be (Get-Date 25/12/2017)
+            }
+            It "Boxing Day" {
+                Get-BoxingDay -Year 2017 | Should -Be (Get-Date 26/12/2017)
+            }
+        }
+        Context "2018" {
+            It "New Year's Day 2018" {
+                Get-NewYearsDay -Year 2018 | Should -Be (Get-Date 1/1/2018)
+            }
+            It "Good Friday" {
+                Get-GoodFriday -Year 2018 | Should -Be (Get-Date 30/3/2018)
+            }
+            It "Easter Sunday" {
+                Get-EasterSunday -Year 2018 | Should -Be (Get-Date 1/4/2018)
+            }
+            It "Easter Monday" {
+                Get-EasterMonday -Year 2018 | Should -Be (Get-Date 2/4/2018)
+            }
+            It "Early May Bank Holiday" {
+                Get-EarlyMayBankHoliday -Year 2018 | Should -Be (Get-Date 7/5/2018)
+            }
+            It "Spring Bank Holiday" {
+                Get-SpringBankHoliday -Year 2018 | Should -Be (Get-Date 28/5/2018)
+            }
+            It "Summer Bank Holiday" {
+                Get-SummerBankHoliday -Year 2018 | Should -Be (Get-Date 27/8/2018)
+            }
+            It "Christmas Day" {
+                Get-ChristmasDay -Year 2018 | Should -Be (Get-Date 25/12/2018)
+            }
+            It "Boxing Day" {
+                Get-BoxingDay -Year 2018 | Should -Be (Get-Date 26/12/2018)
+            }
+        }
+        Context "2019" {
+            It "New Year's Day 2019" {
+                Get-NewYearsDay -Year 2019 | Should -Be (Get-Date 1/1/2019)
+            }
+            It "Good Friday" {
+                Get-GoodFriday -Year 2019 | Should -Be (Get-Date 19/4/2019)
+            }
+            It "Easter Sunday" {
+                Get-EasterSunday -Year 2019 | Should -Be (Get-Date 21/4/2019)
+            }
+            It "Easter Monday" {
+                Get-EasterMonday -Year 2019 | Should -Be (Get-Date 22/4/2019)
+            }
+            It "Early May Bank Holiday" {
+                Get-EarlyMayBankHoliday -Year 2019 | Should -Be (Get-Date 6/5/2019)
+            }
+            It "Spring Bank Holiday" {
+                Get-SpringBankHoliday -Year 2019 | Should -Be (Get-Date 27/5/2019)
+            }
+            It "Summer Bank Holiday" {
+                Get-SummerBankHoliday -Year 2019 | Should -Be (Get-Date 26/8/2019)
+            }
+            It "Christmas Day" {
+                Get-ChristmasDay -Year 2019 | Should -Be (Get-Date 25/12/2019)
+            }
+            It "Boxing Day" {
+                Get-BoxingDay -Year 2019 | Should -Be (Get-Date 26/12/2019)
+            }
+        }
         Context "2020" {
             It "New Year's Day 2020" {
                 Get-NewYearsDay -Year 2020 | Should -Be (Get-Date 1/1/2020)
