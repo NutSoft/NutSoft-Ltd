@@ -58,7 +58,7 @@ function Get-GoodFriday {
     )
 
     process {
-        Get-Date 2/4/2021
+        (Get-EasterSunday -Year $Year).AddDays(-2)
     }
 }
 
@@ -106,7 +106,7 @@ function Get-EasterMonday {
     )
 
     process {
-        Get-Date 5/4/2021
+        (Get-EasterSunday -Year $Year).AddDays(1)
     }
 }
 
