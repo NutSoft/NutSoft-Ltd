@@ -121,7 +121,19 @@ function Get-EarlyMayBankHoliday {
     )
 
     process {
-        Get-Date 3/5/2021
+        switch ($Year) {
+            2020 {
+                $day = Get-Date 2020/5/8
+            }
+            Default {
+                $day = Get-Date "$Year/5/1"
+                while ($day.DayOfWeek -match 'Sunday|Tuesday|Wednesday|Thursday|Friday|Saturday') {
+                    $day = $day.AddDays(1)
+                }
+            }
+        }
+
+        $day
     }
 }
 
@@ -136,7 +148,19 @@ function Get-SpringBankHoliday {
     )
 
     process {
-        Get-Date 31/5/2021
+        switch ($Year) {
+            2022 {
+                $day = Get-Date 2022/6/2
+            }
+            Default {
+                $day = Get-Date "$Year/5/31"
+                while ($day.DayOfWeek -match 'Sunday|Tuesday|Wednesday|Thursday|Friday|Saturday') {
+                    $day = $day.AddDays(-1)
+                }
+            }
+        }
+        
+        $day
     }
 }
 
@@ -151,7 +175,11 @@ function Get-SummerBankHoliday {
     )
 
     process {
-        Get-Date 30/8/2021
+        $day = Get-Date "$Year/8/31"
+        while ($day.DayOfWeek -match 'Sunday|Tuesday|Wednesday|Thursday|Friday|Saturday') {
+            $day = $day.AddDays(-1)
+        }
+        $day
     }
 }
 
@@ -166,7 +194,11 @@ function Get-ChristmasDay {
     )
 
     process {
-        Get-Date 27/12/2021
+        $day = Get-Date "$Year/12/25"
+        while (Assert-IsWeekend -Date $day) {
+            $day = $day.AddDays(1)
+        }
+        $day
     }
 }
 
@@ -181,6 +213,10 @@ function Get-BoxingDay {
     )
 
     process {
-        Get-Date 28/12/2021
+        $day = (Get-ChristmasDay -Year $Year).AddDays(1)
+        while (Assert-IsWeekend -Date $day) {
+            $day = $day.AddDays(1)
+        }
+        $day
     }
 }
