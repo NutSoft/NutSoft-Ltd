@@ -302,3 +302,32 @@ function Get-DaysBetweenTwoDates {
     Where-Object { -not ($_.DayOfWeek -match 'Saturday|Sunday' -and $PSBoundParameters.ContainsKey('Weekdays')) } |
     Where-Object { -not ($bankHolidays -contains $_ -and $PSBoundParameters.ContainsKey('Weekdays')) }
 }
+
+function Get-DaysInMonth {
+    [CmdletBinding()]
+    param (
+        [Parameter(
+            ValueFromPipeline = $true
+        )]
+        [ValidateSet("January","February","March","April","May","June","July","August","September","October","November","December")]
+        [string]
+        $Month = $((Get-Culture).DateTimeFormat.GetMonthName((Get-Date).Month)),
+        [int]
+        $Year = (Get-Date).Year,
+        [switch]
+        $Weekdays
+    )
+
+    process {
+        $monthNumber = [datetime]::ParseExact($Month, "MMMM", [Globalization.CultureInfo]::CurrentCulture).Month
+        $days = [datetime]::DaysInMonth($Year, $monthNumber)
+        $start = (Get-Date ("{0}/{1}/1" -f $Year, $monthNumber))
+        $end = $start.AddDays($days)
+        if ($PSBoundParameters.ContainsKey("Weekdays")) {
+            Get-DaysBetweenTwoDates -Start $start -End $end -Weekdays
+        } else {
+            Get-DaysBetweenTwoDates -Start $start -End $end
+        }
+        
+    }
+}
