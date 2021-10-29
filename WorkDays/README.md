@@ -1,6 +1,6 @@
 NutSoft-Ltd
 
-A PowerShell modules along with some Pester tests.
+A PowerShell module along with some Pester tests.
 
 I created these PowerShell functions (using PowerShell V2.0) many years ago as an exercise in PowerShell scripting
 whilst also serving to determine the number of working days between any 2 dates.
