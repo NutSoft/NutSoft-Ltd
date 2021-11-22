@@ -1,5 +1,3 @@
-
-
 # Define the structural test container.
 $data = @{
     Module = 'WorkDays'
@@ -37,7 +35,3 @@ $container = New-PesterContainer -Path ".\[Assert|Get]*.Tests.ps1"
 
 # Pester test the module.
 Invoke-Pester -Container $container -Output Detailed
-
-
-
-
