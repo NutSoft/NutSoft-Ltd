@@ -29,5 +29,37 @@ Describe "Get-NewYearsDay Tests" {
         It "New Year's Day 2022" {
             Get-NewYearsDay -Year 2022 | Should -Be (Get-Date 3/1/2022)
         }
+
+        It "New Year's Day 2023" {
+            Get-NewYearsDay -Year 2023 | Should -Be (Get-Date 2/1/2023)
+        }
+
+        It "New Year's Day 2024" {
+            Get-NewYearsDay -Year 2024 | Should -Be (Get-Date 1/1/2024)
+        }
+
+        It "New Year's Day 2025" {
+            Get-NewYearsDay -Year 2025 | Should -Be (Get-Date 1/1/2025)
+        }
+
+        It "New Year's Day 2026" {
+            Get-NewYearsDay -Year 2026 | Should -Be (Get-Date 1/1/2026)
+        }
+
+        It "New Year's Day 2027" {
+            Get-NewYearsDay -Year 2027 | Should -Be (Get-Date 1/1/2027)
+        }
+
+        It "New Year's Day 2028" {
+            Get-NewYearsDay -Year 2028 | Should -Be (Get-Date 3/1/2028)
+        }
+
+        It "New Year's Day 2029" {
+            Get-NewYearsDay -Year 2029 | Should -Be (Get-Date 1/1/2029)
+        }
+
+        It "New Year's Day 2030" {
+            Get-NewYearsDay -Year 2030 | Should -Be (Get-Date 1/1/2030)
+        }
     }
 }
