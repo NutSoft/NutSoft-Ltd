@@ -24,7 +24,7 @@ Describe "<Module> Module Tests" -Tag ('Structure') {
             "$PSScriptRoot\..\*.ps1" | Should -Exist
         }
 
-        It "$Module is valid PowerShell code" -TestCases @{ Module = $Module } {
+        It "$Module module is valid PowerShell code" -TestCases @{ Module = $Module } {
             $file = Get-Content -Path "$PSScriptRoot\..\$Module.psm1" `
                 -ErrorAction Stop
             $errors = $null
