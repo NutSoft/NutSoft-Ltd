@@ -15,6 +15,7 @@ $data = @{
         'Get-EasterSunday',
         'Get-GoodFriday',
         'Get-NewYearsDay',
+        'Get-NextNamedDay',
         'Get-SpringBankHoliday',
         'Get-SummerBankHoliday'
     )

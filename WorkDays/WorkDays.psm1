@@ -12,6 +12,7 @@
 . $PSScriptRoot\Get-EasterSunday.ps1
 . $PSScriptRoot\Get-GoodFriday.ps1
 . $PSScriptRoot\Get-NewYearsDay.ps1
+. $PSScriptRoot\Get-NextNamedDay.ps1
 . $PSScriptRoot\Get-SpringBankHoliday.ps1
 . $PSScriptRoot\Get-SummerBankHoliday.ps1
 
@@ -28,5 +29,6 @@ Export-ModuleMember Get-EasterMonday
 Export-ModuleMember Get-EasterSunday
 Export-ModuleMember Get-GoodFriday
 Export-ModuleMember Get-NewYearsDay
+Export-ModuleMember Get-NextNamedDay
 Export-ModuleMember Get-SpringBankHoliday
 Export-ModuleMember Get-SummerBankHoliday
