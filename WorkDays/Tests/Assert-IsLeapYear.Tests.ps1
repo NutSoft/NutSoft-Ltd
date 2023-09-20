@@ -25,5 +25,17 @@ Describe "Assert-IsLeapYear Tests" {
         It "2024 is a Leap Year" {
             Assert-IsLeapYear -Year 2024 | Should -Be $true
         }
+
+        It "2025 isn't a Leap Year" {
+            Assert-IsLeapYear -Year 2025 | Should -Be $false
+        }
+
+        It "2028 is a Leap Year" {
+            Assert-IsLeapYear -Year 2028 | Should -Be $true
+        }
+
+        It "2030 isn't a Leap Year" {
+            Assert-IsLeapYear -Year 2030 | Should -Be $false
+        }
     }
 }
