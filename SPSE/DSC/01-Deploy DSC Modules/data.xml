@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<servers>
+    <server name="APP01">
+        <modules>
+            <module name="SqlServerDsc" path="C:\Program Files\WindowsPowerShell\Modules\SqlServerDsc" />
+            <module name="SharePointDsc" path="C:\Program Files\WindowsPowerShell\Modules\SharePointDsc" />
+            <module name="CertificateDsc" path="C:\Program Files\WindowsPowerShell\Modules\CertificateDsc" />
+            <module name="ComputerManagementDsc" path="C:\Program Files\WindowsPowerShell\Modules\ComputerManagementDsc" />
+            <module name="WebAdministrationDsc" path="C:\Program Files\WindowsPowerShell\Modules\WebAdministrationDsc" />
+            <module name="xCredSSP" path="C:\Program Files\WindowsPowerShell\Modules\xCredSSP" />
+        </modules>
+    </server>
+    <server name="APP02">
+        <modules>
+            <module name="SqlServerDsc" path="C:\Program Files\WindowsPowerShell\Modules\SqlServerDsc" />
+            <module name="SharePointDsc" path="C:\Program Files\WindowsPowerShell\Modules\SharePointDsc" />
+            <module name="CertificateDsc" path="C:\Program Files\WindowsPowerShell\Modules\CertificateDsc" />
+            <module name="ComputerManagementDsc" path="C:\Program Files\WindowsPowerShell\Modules\ComputerManagementDsc" />
+            <module name="WebAdministrationDsc" path="C:\Program Files\WindowsPowerShell\Modules\WebAdministrationDsc" />
+            <module name="xCredSSP" path="C:\Program Files\WindowsPowerShell\Modules\xCredSSP" />
+        </modules>
+    </server>
+    <server name="OOS01">
+        <modules>
+            <module name="OfficeOnlineServerDsc" path="C:\Program Files\WindowsPowerShell\Modules\OfficeOnlineServerDsc" />
+        </modules>
+    </server>
+    <server name="OOS02">
+        <modules>
+            <module name="OfficeOnlineServerDsc" path="C:\Program Files\WindowsPowerShell\Modules\OfficeOnlineServerDsc" />
+        </modules>
+    </server>
+    <server name="SQL01">
+        <modules>
+            <module name="SqlServerDsc" path="C:\Program Files\WindowsPowerShell\Modules\SqlServerDsc" />
+        </modules>
+    </server>
+    <server name="WFE01">
+        <modules>
+            <module name="SqlServerDsc" path="C:\Program Files\WindowsPowerShell\Modules\SqlServerDsc" />
+            <module name="SharePointDsc" path="C:\Program Files\WindowsPowerShell\Modules\SharePointDsc" />
+            <module name="CertificateDsc" path="C:\Program Files\WindowsPowerShell\Modules\CertificateDsc" />
+            <module name="ComputerManagementDsc" path="C:\Program Files\WindowsPowerShell\Modules\ComputerManagementDsc" />
+            <module name="WebAdministrationDsc" path="C:\Program Files\WindowsPowerShell\Modules\WebAdministrationDsc" />
+            <module name="xCredSSP" path="C:\Program Files\WindowsPowerShell\Modules\xCredSSP" />
+        </modules>
+    </server>
+    <server name="WFE02">
+        <modules>
+            <module name="SqlServerDsc" path="C:\Program Files\WindowsPowerShell\Modules\SqlServerDsc" />
+            <module name="SharePointDsc" path="C:\Program Files\WindowsPowerShell\Modules\SharePointDsc" />
+            <module name="CertificateDsc" path="C:\Program Files\WindowsPowerShell\Modules\CertificateDsc" />
+            <module name="ComputerManagementDsc" path="C:\Program Files\WindowsPowerShell\Modules\ComputerManagementDsc" />
+            <module name="WebAdministrationDsc" path="C:\Program Files\WindowsPowerShell\Modules\WebAdministrationDsc" />
+            <module name="xCredSSP" path="C:\Program Files\WindowsPowerShell\Modules\xCredSSP" />
+        </modules>
+    </server>
+</servers>
