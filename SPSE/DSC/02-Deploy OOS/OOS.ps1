@@ -24,9 +24,9 @@ Configuration OOS {
             Recurse         = $true
             MatchSource     = $true
             Force           = $true
-            SourcePath      = $Node.OOSDVD
-            Credential      = $Credential
+            SourcePath      = $Node.SourcePath
             DestinationPath = $Node.DestinationPath
+            Credential      = $Credential
         }
 
         PfxImport OOSSSLCert {
@@ -80,7 +80,7 @@ Configuration OOS {
 
         OfficeOnlineServerInstall InstallOOS {
             Ensure    = 'Present'
-            Path      = $Node.OOSSource
+            Path      = $Node.SetupExe
             DependsOn = $prereqDependencies
         }
 

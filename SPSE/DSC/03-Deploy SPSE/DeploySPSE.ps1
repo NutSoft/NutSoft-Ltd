@@ -25,23 +25,15 @@ function  Invoke-DscConfiguration {
     do {
         Start-Sleep -Seconds 10 
     }
-    while (!(Test-Connection -TargetName $ComputerName -Count 1 -Quiet)) 
+    while (!(Test-Connection -ComputerName $ComputerName -Count 1 -Quiet)) 
     # Resume the current deployment - if the server did not reboot (not required) then this will complete immediately
     Start-DscConfiguration -UseExisting -Wait -Verbose -ComputerName $ComputerName -Force -ErrorAction SilentlyContinue
 }
 #endregion Invoke-DscConfiguration
 
-# Install & deploy OOS
-. .\OOS.ps1
-OOS -ConfigurationData .\ConfigData.psd1 `
-    -OutputPath .\MOFS\ `
-    -Credential $credSetup
-
-Start-DscConfiguration -Path .\MOFS\ -Verbose -Wait -Force
-
 # Install & deploy SPSE
 . .\SPSE.ps1
-SPSE -ComputerName  -ConfigurationData .\ConfigData.psd1 `
+SPSE -ConfigurationData .\ConfigData.psd1 `
      -OutputPath .\MOFS\ `
      -CredentialSPFarm $credSPFarm `
      -CredentialSetup $credSetup `
@@ -51,3 +43,7 @@ SPSE -ComputerName  -ConfigurationData .\ConfigData.psd1 `
      -CredentialSPWeb $credSPWeb `
      -CredentialPassPhrase $credPassPhrase
 
+Invoke-DscConfiguration -ComputerName $SPAPP01 -Path .\MOFS\ 
+Invoke-DscConfiguration -ComputerName $SPAPP02 -Path .\MOFS\ 
+Invoke-DscConfiguration -ComputerName $SPWFE01 -Path .\MOFS\ 
+Invoke-DscConfiguration -ComputerName $SPWFE02 -Path .\MOFS\ 
