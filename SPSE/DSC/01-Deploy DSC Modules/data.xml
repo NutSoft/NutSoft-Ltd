@@ -23,11 +23,13 @@
     <server name="OOS01">
         <modules>
             <module name="OfficeOnlineServerDsc" path="C:\Program Files\WindowsPowerShell\Modules\OfficeOnlineServerDsc" />
+            <module name="CertificateDsc" path="C:\Program Files\WindowsPowerShell\Modules\CertificateDsc" />
         </modules>
     </server>
     <server name="OOS02">
         <modules>
             <module name="OfficeOnlineServerDsc" path="C:\Program Files\WindowsPowerShell\Modules\OfficeOnlineServerDsc" />
+            <module name="CertificateDsc" path="C:\Program Files\WindowsPowerShell\Modules\CertificateDsc" />
         </modules>
     </server>
     <server name="SQL01">
