@@ -21,13 +21,18 @@ function  Invoke-DscConfiguration {
     )
     # Start the DSC configuration - this may or may not require a server reboot
     Start-DscConfiguration -path $Path -Verbose -Wait -Force -ComputerName $ComputerName
-    # Wait 10 seconds before testing if computer has returned from restarting - repeat as necessary
+
+    # Wait 10 seconds before testing if computer has returned from restarting (if at all)
     do {
         Start-Sleep -Seconds 10 
     }
-    while (!(Test-Connection -ComputerName $ComputerName -Count 1 -Quiet)) 
-    # Resume the current deployment - if the server did not reboot (not required) then this will complete immediately
-    Start-DscConfiguration -UseExisting -Wait -Verbose -ComputerName $ComputerName -Force -ErrorAction SilentlyContinue
+    while (!(Test-Connection -ComputerName $ComputerName -Count 1 -Quiet))
+
+    # Test the computer to see if further configuration is pending
+    if (!(Test-DscConfiguration -ComputerName $ComputerName)) {
+        # Resume the current deployment
+        Start-DscConfiguration -UseExisting -Wait -Verbose -ComputerName $ComputerName -Force -ErrorAction SilentlyContinue
+    }
 }
 #endregion Invoke-DscConfiguration
 

@@ -69,7 +69,6 @@ Configuration SPSE {
         }
 
         # Configure CredSSP settings
-
         xCredSSP Server {
             Ensure = 'Present'
             Role   = 'Server'
@@ -113,12 +112,7 @@ Configuration SPSE {
             MembersToInclude = $CredentialSetup.UserName
         }
 
-        #**********************************************************
-        # Install Binaries
-        #
-        # This section installs SharePoint and its Prerequisites
-        #**********************************************************
-
+        # Install SharePoint prerequisites
         SPInstallPrereqs SharePointPrereqInstall {
             IsSingleInstance = 'Yes'
             Ensure           = 'Present'
@@ -135,6 +129,7 @@ Configuration SPSE {
             PsDscRunAsCredential = $CredentialSetup
         }
 
+        # Install SharePoint
         SPInstall InstallSharePoint {
             IsSingleInstance = 'Yes'
             Ensure           = 'Present'
@@ -149,12 +144,106 @@ Configuration SPSE {
             PsDscRunAsCredential = $CredentialSetup
         }
 
+        # Remove unawanted IIS Application Pools and Sites
+        $ConfigurationData.NonNodeData.IIS.UnwantedWebAppPools | ForEach-Object {
+            WebAppPool $_ {
+                Name   = $_
+                Ensure = 'Absent'
+            }
+        }
+
+        WebSite DefaultSite {
+            Name   = 'Default Web Site'
+            Ensure = 'Absent'
+        }
+
+        # Create SQL alias
+        SqlAlias SPSqlALias {
+            Ensure            = 'Present'
+            Name              = $ConfigurationData.NonNodeData.SqlServerAlias.Name
+            ServerName        = $ConfigurationData.NonNodeData.SqlServerAlias.ServerName
+            Protocol          = $ConfigurationData.NonNodeData.SqlServerAlias.Protocol
+            UseDynamicTcpPort = $ConfigurationData.NonNodeData.SqlServerAlias.UseDynamicTcpPort
+            TcpPort           = $ConfigurationData.NonNodeData.SqlServerAlias.TcpPort
+        }
+
+        File SQLUDL {
+            Ensure          = 'Present'
+            DestinationPath = 'C:\Users\Public\Desktop\SQLTest.UDL'
+            Contents        = ''
+        }
+    }
+
+    Node $AllNodes.Where{ $_.FirstServer }.NodeName {
+        SPFarm CreateSPFarm {
+            IsSingleInstance         = 'Yes'
+            Ensure                   = 'Present'
+            DatabaseServer           = $Node.SharePoint.DatabaseServer
+            FarmConfigDatabaseName   = $Node.SharePoint.FarmConfigDatabaseName
+            AdminContentDatabaseName = $Node.SharePoint.FarmAdminDatabaseName
+            FarmAccount              = $CredentialSPFarm
+            Passphrase               = $CredentialPassPhrase
+            ServerRole               = $Node.ServerRole
+            RunCentralAdmin          = $($Node.ServerRole -match 'Application')
+            CentralAdministrationUrl = $Node.SharePoint.CentralAdmin.Url
+            PsDscRunAsCredential     = $CredentialSetup
+            DependsOn                = '[SPInstall]InstallSharePoint'
+        }
+
+        SPFarmAdministrators SPAdmins {
+            DependsOn            = '[SPFarm]CreateSPFarm'
+            IsSingleInstance     = 'Yes'
+            Members              = $Node.SharePoint.SharePointFarmAdmins
+            PsDscRunAsCredential = $CredentialSetup
+        }
+    }
+
+    Node $AllNodes.Where{ !($_.FirstServer) }.NodeName {
+        WaitForAll SPFarmCreated {
+            ResourceName     = '[SPFarm]CreateSPFarm'
+            NodeName         = $AllNodes.Where{ $_.FirstServer }.NodeName
+            RetryIntervalSec = 60
+            RetryCount       = 30
+        }
+
+        SPFarm JoinSPFarm {
+            IsSingleInstance         = 'Yes'
+            Ensure                   = 'Present'
+            DatabaseServer           = $Node.SharePoint.DatabaseServer
+            FarmConfigDatabaseName   = $Node.SharePoint.FarmConfigDatabaseName
+            AdminContentDatabaseName = $Node.SharePoint.FarmAdminDatabaseName
+            FarmAccount              = $CredentialSPFarm
+            Passphrase               = $CredentialPassPhrase
+            ServerRole               = $Node.ServerRole
+            RunCentralAdmin          = $($Node.ServerRole -match 'Application')
+            CentralAdministrationUrl = $Node.SharePoint.CentralAdmin.Url
+            PsDscRunAsCredential     = $CredentialSetup
+            DependsOn                = '[WaitForAll]SPFarmCreated'
+        }
+    }
+
+    Node $AllNodes.NodeName {
         SPCertificate SPSSLCert {
-            CertificateFilePath  = $Node.CertPath
+            CertificateFilePath  = $Node.SSLCertificate.CertificateFilePath
             Store                = 'EndEntity'
             Exportable           = $true
             Ensure               = 'Present'
             PsDscRunAsCredential = $CredentialSetup
+        }
+
+        WebSite CentralAdminCertificate {
+            Ensure      = 'Present'
+            Name        = $Node.SharePoint.CentralAdmin.Name
+            BindingInfo = @(
+                DSC_WebBindingInformation {
+                    Protocol              = $Node.SharePoint.CentralAdmin.Protocol
+                    Port                  = $Node.SharePoint.CentralAdmin.Port
+                    HostName              = $Node.SharePoint.CentralAdmin.HostName
+                    CertificateThumbprint = $Node.SSLCertificate.Thumbprint
+                    CertificateStoreName  = $Node.SSLCertificate.CertificateStoreName
+                }
+            )
+            DependsOn   = '[SPCertificate]SPSSLCert'
         }
     }
 }
